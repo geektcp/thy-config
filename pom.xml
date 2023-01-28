@@ -12,8 +12,8 @@
     </licenses>
     <url>https://github.com/geektcp/thy-config</url>
     <scm>
-        <connection>scm:git:https://github.com/geektcp/thy-common</connection>
-        <developerConnection>scm:git:https://github.com/geektcp/thy-common.git</developerConnection>
+        <connection>scm:git:https://github.com/geektcp/thy-config</connection>
+        <developerConnection>scm:git:https://github.com/geektcp/thy-config.git</developerConnection>
         <url>git:https://github.com/geektcp/thy-config.git</url>
     </scm>
     <developers>
