@@ -37,6 +37,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -88,6 +89,9 @@ public class NacosConfigProperties {
 
 	private static final Logger log = LoggerFactory
 			.getLogger(NacosConfigProperties.class);
+
+	@Value("${spring.cloud.nacos.config.password.encrypt.enabled:true}")
+	private boolean encrypt = false;
 
 	@Autowired
 	@JsonIgnore
@@ -258,7 +262,11 @@ public class NacosConfigProperties {
 	}
 
 	public void setPassword(String password) {
-		this.password = EncryptUtils.decrypt(password);
+		if(encrypt) {
+			this.password = EncryptUtils.decrypt(password);
+		}else {
+			this.password = password;
+		}
 	}
 
 	public String getPrefix() {

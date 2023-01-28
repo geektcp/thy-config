@@ -80,6 +80,12 @@
       "description": "nacos config service's password to authenticate."
     },
     {
+      "name": "spring.cloud.nacos.config.password.encrypt.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": "false",
+      "description": "nacos config service's password to authenticate."
+    },
+    {
       "name": "spring.cloud.nacos.username",
       "type": "java.lang.String",
       "description": "nacos userName to authenticate."
@@ -141,6 +147,12 @@
       "name": "spring.cloud.nacos.discovery.password",
       "type": "java.lang.String",
       "defaultValue": "${spring.cloud.nacos.password}",
+      "description": "nacos discovery service's password to authenticate."
+    },
+    {
+      "name": "spring.cloud.nacos.discovery.password.encrypt.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": "false",
       "description": "nacos discovery service's password to authenticate."
     }
   ]

@@ -208,6 +208,9 @@ public class NacosDiscoveryProperties {
 	 */
 	private boolean ephemeral = true;
 
+	@Value("${spring.cloud.nacos.discovery.password.encrypt.enabled:true}")
+	private boolean encrypt = false;
+
 	@Autowired
 	private InetUtils inetUtils;
 
@@ -468,7 +471,11 @@ public class NacosDiscoveryProperties {
 	}
 
 	public void setPassword(String password) {
-		this.password = EncryptUtils.decrypt(password);
+		if(encrypt) {
+			this.password = EncryptUtils.decrypt(password);
+		}else {
+			this.password = password;
+		}
 	}
 
 	public void setPasswordNoDecrypt(String password) {
