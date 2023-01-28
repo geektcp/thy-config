@@ -14,7 +14,7 @@
     <scm>
         <connection>scm:git:https://github.com/geektcp/thy-common</connection>
         <developerConnection>scm:git:https://github.com/geektcp/thy-common.git</developerConnection>
-        <url>git:https://github.com/geektcp/thy-common.git</url>
+        <url>git:https://github.com/geektcp/thy-config.git</url>
     </scm>
     <developers>
         <developer>
