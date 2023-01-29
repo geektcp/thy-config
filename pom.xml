@@ -23,6 +23,9 @@
             <organization>https://github.com/geektcp</organization>
         </developer>
     </developers>
+    <name>thy-config</name>
+    <description>spring cloud config library for Java</description>
+
     <groupId>com.geektcp.common</groupId>
     <artifactId>thy-config</artifactId>
     <version>1.0.0.RELEASE</version>
@@ -37,8 +40,8 @@
     <dependencies>
         <dependency>
             <groupId>com.geektcp.common</groupId>
-            <artifactId>thy-common-core</artifactId>
-            <version>1.0.8.RELEASE</version>
+            <artifactId>thy-core</artifactId>
+            <version>1.0.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba.nacos</groupId>
@@ -71,7 +74,7 @@
             <version>1.0.10</version>
         </dependency>
     </dependencies>
-    
+
     <build>
         <resources>
             <resource>
