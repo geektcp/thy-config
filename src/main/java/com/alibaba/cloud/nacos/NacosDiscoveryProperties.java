@@ -211,6 +211,12 @@ public class NacosDiscoveryProperties {
 	@Value("${spring.cloud.nacos.discovery.password.encrypt.enabled:true}")
 	private boolean encrypt = false;
 
+	@Value("${spring.cloud.nacos.private-key}")
+	private String privateKey;
+
+	@Value("${spring.cloud.nacos.public-key}")
+	private String publicKey;
+
 	@Autowired
 	private InetUtils inetUtils;
 
@@ -284,6 +290,22 @@ public class NacosDiscoveryProperties {
 	@Deprecated
 	public NamingService namingServiceInstance() {
 		return nacosServiceManager.getNamingService(this.getNacosProperties());
+	}
+
+	public String getPrivateKey() {
+		return privateKey;
+	}
+
+	public void setPrivateKey(String privateKey) {
+		this.privateKey = privateKey;
+	}
+
+	public String getPublicKey() {
+		return publicKey;
+	}
+
+	public void setPublicKey(String publicKey) {
+		this.publicKey = publicKey;
 	}
 
 	public String getEndpoint() {
@@ -471,11 +493,7 @@ public class NacosDiscoveryProperties {
 	}
 
 	public void setPassword(String password) {
-		if(encrypt) {
-			this.password = EncryptUtils.decrypt(password);
-		}else {
-			this.password = password;
-		}
+		this.password = password;
 	}
 
 	public void setPasswordNoDecrypt(String password) {
@@ -594,6 +612,13 @@ public class NacosDiscoveryProperties {
 		}
 		if (StringUtils.isEmpty(this.getPassword())) {
 			this.setPassword(env.resolvePlaceholders("${spring.cloud.nacos.password:}"));
+		}
+
+		if(StringUtils.isEmpty(this.getPrivateKey()) || StringUtils.isEmpty(this.getPublicKey()) || StringUtils.isEmpty(this.getPassword())){
+			return;
+		}
+		if(encrypt) {
+			this.setPassword(EncryptUtils.decrypt(this.getPrivateKey(), this.getPublicKey(), this.getPassword()));
 		}
 	}
 
