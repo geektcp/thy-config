@@ -154,16 +154,6 @@
       "type": "java.lang.Boolean",
       "defaultValue": "false",
       "description": "nacos discovery service's password to authenticate."
-    },
-    {
-      "name": "spring.cloud.nacos.private-key",
-      "type": "java.lang.String",
-      "description": "private key."
-    },
-    {
-      "name": "spring.cloud.nacos.public-key",
-      "type": "java.lang.String",
-      "description": "public key."
     }
   ]
 }
