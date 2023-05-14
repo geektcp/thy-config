@@ -93,12 +93,6 @@ public class NacosConfigProperties {
 	@Value("${spring.cloud.nacos.config.password.encrypt.enabled:true}")
 	private boolean encrypt = false;
 
-	@Value("${spring.cloud.nacos.private-key}")
-	private String privateKey;
-
-	@Value("${spring.cloud.nacos.public-key}")
-	private String publicKey;
-
 	@Autowired
 	@JsonIgnore
 	private Environment environment;
@@ -122,17 +116,9 @@ public class NacosConfigProperties {
 			this.setUsername(
 					environment.resolvePlaceholders("${spring.cloud.nacos.username:}"));
 		}
-
 		if (StringUtils.isEmpty(this.getPassword())) {
 			this.setPassword(
 					environment.resolvePlaceholders("${spring.cloud.nacos.password:}"));
-		}
-
-		if(StringUtils.isEmpty(this.getPrivateKey()) || StringUtils.isEmpty(this.getPublicKey()) || StringUtils.isEmpty(this.getPassword())){
-			return;
-		}
-		if(encrypt) {
-			this.setPassword(EncryptUtils.decrypt(this.getPrivateKey(), this.getPublicKey(), this.getPassword()));
 		}
 	}
 
@@ -254,21 +240,6 @@ public class NacosConfigProperties {
 	private boolean refreshEnabled = true;
 
 	// todo sts support
-	public String getPrivateKey() {
-		return privateKey;
-	}
-
-	public void setPrivateKey(String privateKey) {
-		this.privateKey = privateKey;
-	}
-
-	public String getPublicKey() {
-		return publicKey;
-	}
-
-	public void setPublicKey(String publicKey) {
-		this.publicKey = publicKey;
-	}
 
 	public String getServerAddr() {
 		return serverAddr;
@@ -291,7 +262,11 @@ public class NacosConfigProperties {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		if(encrypt) {
+			this.password = EncryptUtils.decrypt(password);
+		}else {
+			this.password = password;
+		}
 	}
 
 	public String getPrefix() {
@@ -495,7 +470,7 @@ public class NacosConfigProperties {
 	public String getRefreshableDataids() {
 		return null == getSharedConfigs() ? null
 				: getSharedConfigs().stream().filter(Config::isRefresh)
-						.map(Config::getDataId).collect(Collectors.joining(COMMAS));
+				.map(Config::getDataId).collect(Collectors.joining(COMMAS));
 	}
 
 	/**
