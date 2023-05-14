@@ -28,7 +28,7 @@
 
     <groupId>com.geektcp.common</groupId>
     <artifactId>thy-config</artifactId>
-    <version>1.0.0.RELEASE</version>
+    <version>1.0.2</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -39,9 +39,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.geektcp.common</groupId>
-            <artifactId>thy-core</artifactId>
-            <version>1.0.0.RELEASE</version>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.14</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba.nacos</groupId>
